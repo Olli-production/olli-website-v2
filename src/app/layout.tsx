@@ -5,6 +5,7 @@ import "@fontsource/manrope/600.css";
 import "@fontsource/manrope/700.css";
 import "@fontsource/playfair-display/400.css";
 import "@fontsource/playfair-display/400-italic.css";
+import "@fontsource/jetbrains-mono/400.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,9 +21,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body
-        className="font-sans antialiased bg-background text-text-primary"
+        className="font-sans antialiased bg-background text-text-primary bg-noise"
         style={{
           fontFamily: "'Manrope', sans-serif",
         }}

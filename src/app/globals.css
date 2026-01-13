@@ -1,30 +1,106 @@
-@import 'tailwindcss';
-@plugin '@tailwindcss/postcss';
+@import "tailwindcss";
 
 @theme {
+  /* Fonts */
+  --font-sans: 'Manrope', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Brand Colors */
   --color-background: #F3F3F3;
   --color-background-secondary: #E9E9E9;
   --color-text-primary: #212121;
   --color-text-secondary: #3E3E3D;
   --color-accent: #90F0BC;
+  --color-lime: #DFFF00;
   --color-border: #E9E9E9;
-
-  --font-manrope: 'Manrope', sans-serif;
-  --font-playfair: 'Playfair Display', serif;
+  --color-success: #2e7d32;
+  --color-warning: #f57c00;
+  --color-error: #d32f2f;
 }
 
-:root {
-  --background: #F3F3F3;
-  --foreground: #212121;
-}
-
+/* Base styles */
 body {
-  color: var(--foreground);
-  background: var(--background);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  cursor: none;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Selection */
+::selection {
+  background-color: color-mix(in srgb, var(--color-lime) 50%, transparent);
+  color: var(--color-text-primary);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a,
+button {
+  color: inherit;
+  text-decoration: none;
+  cursor: none;
+}
+
+/* Noise Texture Overlay */
+@utility bg-noise {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
+}
+
+/* Utilities for Colors using CSS variables */
+@utility text-lime {
+  color: var(--color-lime);
+}
+
+@utility bg-lime {
+  background-color: var(--color-lime);
+}
+
+@utility text-accent {
+  color: var(--color-accent);
+}
+
+@utility bg-accent {
+  background-color: var(--color-accent);
+}
+
+/* Animation Utils */
+@keyframes drawLine {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes drawLineVertical {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 100%;
+  }
+}
+
+@utility animate-draw-x {
+  animation: drawLine 1.5s ease-out forwards;
+}
+
+@utility animate-draw-y {
+  animation: drawLineVertical 1.5s ease-out forwards;
 }
