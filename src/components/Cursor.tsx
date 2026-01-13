@@ -5,8 +5,10 @@ import { motion } from "framer-motion";
 export default function Cursor() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         const updateMousePosition = (e: MouseEvent) => {
             setMousePosition({ x: e.clientX, y: e.clientY });
         };
@@ -29,13 +31,15 @@ export default function Cursor() {
         };
     }, []);
 
+    if (!mounted) return null;
+
     return (
         <>
             <motion.div
-                className="fixed top-0 left-0 w-8 h-8 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
+                className="fixed top-0 left-0 w-6 h-6 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
                 animate={{
-                    x: mousePosition.x - 16,
-                    y: mousePosition.y - 16,
+                    x: mousePosition.x - 12,
+                    y: mousePosition.y - 12,
                     scale: isHovering ? 2.5 : 1,
                 }}
                 transition={{
