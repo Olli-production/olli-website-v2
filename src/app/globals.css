@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/postcss';
+
+@theme {
+  --color-background: #F3F3F3;
+  --color-background-secondary: #E9E9E9;
+  --color-text-primary: #212121;
+  --color-text-secondary: #3E3E3D;
+  --color-accent: #90F0BC;
+  --color-border: #E9E9E9;
+
+  --font-manrope: 'Manrope', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+}
+
+:root {
+  --background: #F3F3F3;
+  --foreground: #212121;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
